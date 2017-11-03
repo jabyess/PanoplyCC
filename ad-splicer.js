@@ -75,7 +75,8 @@ init = (episode, campaign) => {
 	if(validated) {
 		episode.audio = replaceAudioWithAds(episode.audio, campaign);
 		episode.audio = stripRemainingSlots(episode.audio);
-		console.log(`Episode ${episode.id} with ads: ${episode.audio}`);
+		console.log('After processing:');
+		console.log(`Episode ${episode.id} audio: ${episode.audio}`);
 	}
 	else {
 		console.error(`No matching targets for ${episode.id}`);

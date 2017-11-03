@@ -1,5 +1,6 @@
-let AdSplicer = require('./ad-splicer.js');
-let episode = parseInt(process.argv[2], 10);
+const AdSplicer = require('./ad-splicer.js');
+const episode = parseInt(process.argv[2], 10);
+const realEpisode = episode - 1;
 
 let adCampaigns = [
 	{ audio: "*AcmeA*", type: "PRE", targets: ["dag-892", "hab-812"], revenue: 1 },
@@ -19,13 +20,14 @@ let episodes = [
 	{ id: "abc-123", audio: "[PRE]++++[MID]++++[MID]++[MID]++[POST]" },
 	{ id: "hab-812", audio: "[PRE][PRE]++++[MID]++++[MID]++[MID]++[POST]" },
 	{ id: "efa-931", audio: "[PRE][PRE]++++++++++" },
-	{ id: "paj-103", audio: "++++[MID]+++++[MID]++++ [MID]++[POST]" }
+	{ id: "paj-103", audio: "++++[MID]+++++[MID]++++[MID]++[POST]" }
 ];
 
-if(!episode) {
+if(!episode || episode < 1 || episode > 5) {
 	console.error('Please enter an episode number, 1-5');
 }
 else {
-	console.log(`Episode ${episodes[episode - 1].id}:`, episodes[episode])
-	AdSplicer(episodes[episode - 1], adCampaigns);
+	console.log('Before processing:');
+	console.log(`Episode ${episodes[realEpisode].id} audio:`, episodes[realEpisode].audio)
+	AdSplicer(episodes[realEpisode], adCampaigns);
 }

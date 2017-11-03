@@ -61,6 +61,13 @@ stripRemainingSlots = (audio) => {
 
 }
 
+concatAudio = (audio) => {
+	if(audio.length) {
+		return audio.join('');
+	}
+	else return audio;
+}
+
 init = (episode, campaign) => {
 	// order by highest revenue ads first
 	let sortedCampaign = sortByRevenue(campaign)
@@ -75,6 +82,7 @@ init = (episode, campaign) => {
 	if(validated) {
 		episode.audio = replaceAudioWithAds(episode.audio, campaign);
 		episode.audio = stripRemainingSlots(episode.audio);
+		episode.audio = concatAudio(episode.audio);
 		console.log('After processing:');
 		console.log(`Episode ${episode.id} audio: ${episode.audio}`);
 	}
